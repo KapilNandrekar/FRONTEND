@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One With The Quiz — Friends Trivia</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style1.css">
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6" >
+
+<div class="w-full max-w-2xl">
+
+  <!-- Header / logo -->
+  <div class="text-center mb-5">
+    <p class="display text-3xl sm:text-4xl" style="color:var(--frame-purple);">THE ONE WITH</p>
+    <p class="display text-4xl sm:text-5xl -mt-1" style="color:var(--couch-orange);">THE QUIZ</p>
+  </div>
+
+  <!-- WELCOME SCREEN -->
+  <section id="screen-welcome" class="screen active frame p-8 sm:p-10 text-center">
+    <div class="mx-auto mb-5 w-20 h-20 rounded-full avatar-ring p-1">
+      <div class="w-full h-full rounded-full bg-[var(--cream-panel)] flex items-center justify-center text-3xl">☕</div>
+    </div>
+    <h1 class="display text-2xl sm:text-3xl mb-3" style="color:var(--frame-purple-deep);">How well do you know the gang from Central Perk?</h1>
+    <p class="text-sm sm:text-base opacity-80 mb-8 max-w-md mx-auto">
+      8 questions about the six friends who never seem to have to work.
+      Answer trivia, identify characters from their description, and race the clock. Could you BE any more ready?
+    </p>
+    <button id="btn-start"
+      class="cursor-pointer inline-flex items-center gap-2 px-8 py-3 rounded-full display text-sm sm:text-base text-white shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+      style="background-color:var(--couch-orange);">
+      START QUIZ
+    </button>
+  </section>
+
+  <!-- QUIZ SCREEN -->
+  <section id="screen-quiz" class="screen">
+
+    <!-- progress -->
+    <div class="mb-3">
+      <div class="flex justify-between items-center mb-1.5 text-xs sm:text-sm font-semibold" style="color:var(--frame-purple-deep);">
+        <span id="progress-label">Question 1 of 8</span>
+        <span id="score-label">Score: 0</span>
+      </div>
+      <div class="w-full h-3 rounded-full overflow-hidden" style="background-color:rgba(62,42,92,0.15);">
+        <div id="progress-fill" class="progress-couch h-full rounded-full" style="width:0%; background-color:var(--couch-orange);"></div>
+      </div>
+    </div>
+
+    <div class="frame p-6 sm:p-8">
+      <!-- timer -->
+      <div class="w-full h-1.5 rounded-full overflow-hidden mb-5" style="background-color:rgba(62,42,92,0.12);">
+        <div id="timer-fill" class="timer-bar h-full rounded-full" style="width:100%; background-color:var(--smiley-yellow);"></div>
+      </div>
+
+      <div id="question-wrap" class="q-enter">
+        <p id="question-kicker" class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--couch-orange);"></p>
+        <h2 id="question-text" class="display text-lg sm:text-2xl leading-snug mb-6" style="color:var(--frame-purple-deep);"></h2>
+
+        <div id="options-wrap" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-5">
+      <button id="btn-next" disabled
+        class="cursor-pointer px-8 py-3 rounded-full display text-sm text-white shadow-lg disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+        style="background-color:var(--frame-purple);">
+        NEXT
+      </button>
+    </div>
+  </section>
+
+  <!-- RESULTS SCREEN -->
+  <section id="screen-results" class="screen frame p-8 sm:p-10 text-center">
+    <div id="result-badge" class="badge-pop mx-auto mb-4 w-24 h-24 rounded-full flex items-center justify-center text-5xl" style="background-color:var(--smiley-yellow);"></div>
+    <h2 id="result-title" class="display text-2xl sm:text-3xl mb-2" style="color:var(--frame-purple-deep);"></h2>
+    <p id="result-score" class="text-xl font-semibold mb-2" style="color:var(--couch-orange);"></p>
+    <p id="result-message" class="text-sm sm:text-base opacity-80 mb-8 max-w-md mx-auto"></p>
+    <button id="btn-restart"
+      class="cursor-pointer inline-flex items-center gap-2 px-8 py-3 rounded-full display text-sm text-white shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-transform"
+      style="background-color:var(--frame-purple);">
+      RESTART QUIZ
+    </button>
+  </section>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
