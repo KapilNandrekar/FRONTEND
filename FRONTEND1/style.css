@@ -37,8 +37,6 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    /* Background image setup with a dark tint overlay (rgba) so your white text pops */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                       url("https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1920&auto=format&fit=crop");
     background-size: cover;
@@ -73,7 +71,7 @@ nav ul li a {
     text-transform: uppercase;
     opacity: 0.8;
     transition: opacity 0.3s;
-    color: white; /* Ensures links stay visible over background */
+    color: white;
 }
 
 nav ul li a:hover {
@@ -94,7 +92,6 @@ nav ul li a:hover {
 
 /* --- LANDING PAGE LAYOUT --- */
 .hero-container {
-    /* Changed from grid to simple flex layout so text spans cleanly */
     display: flex;
     align-items: center;
     padding: 0 8% 50px 8%;
@@ -102,7 +99,7 @@ nav ul li a:hover {
 }
 
 .hero-content {
-    max-width: 550px; /* Slightly wider layout now that the side image is gone */
+    max-width: 550px;
 }
 
 .hero-content .welcome-tag {
@@ -142,8 +139,6 @@ nav ul li a:hover {
 .btn-white:hover {
     transform: translateY(-2px);
 }
-
-/* Note: .hero-image-wrapper and its img styles have been removed as they are no longer needed */
 
 .icon svg { width: 22px; height: 22px; stroke: #4a3222; }
 
@@ -267,20 +262,17 @@ nav ul li a:hover {
 
 /* --- BANNER & REVIEWS --- */
 .promo-banner {
-    /* Your original styles */
     background-color: var(--cream-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 60px 8%; /* Slightly increased padding for better vertical breathing room */
+    padding: 60px 8%; 
     margin: 40px 0;
     border-radius: 4px;
-
-    /* New Background Image Styles */
     background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1061&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;      /* Forces image to fill the entire div without stretching */
-    background-position: center;  /* Centers the image within the container */
-    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover;    
+    background-position: center;  
+    background-repeat: no-repeat; 
 }
 
 .promo-text h2 {
@@ -333,28 +325,28 @@ nav ul li a:hover {
 
 /* --- TESTIMONIAL HEADERS --- */
 .testimonials-container {
-    text-align: center; /* Centers both headings horizontally */
-    margin-top: 50px;   /* Adds spacing above the testimonial block */
+    text-align: center; 
+    margin-top: 50px;   
 }
 
 /* Styles "COME AND JOIN" */
 .testimonials-container h3.self {
     font-size: 12px;
-    letter-spacing: 3px;         /* Gives it a clean, modern look */
+    letter-spacing: 3px;         
     text-transform: uppercase;
-    color: var(--dark-brown);    /* Matches your theme color */
-    margin-bottom: 5px;          /* Brings it closer to the main heading below */
+    color: var(--dark-brown);    
+    margin-bottom: 5px;         
 }
 
-/* Styles "OUR HAPPY CUSTOMERS" */
 .testimonials-container h2 {
     font-family: var(--font-serif);
     font-size: 36px;
     font-weight: bold;
-    color: var(--dark-bg, #333); /* Uses your dark background variable or falls back to off-black */
+    color: var(--dark-bg, #333); 
     margin-top: 0;
-    margin-bottom: 40px;         /* Adds breathing room between headers and the review cards */
+    margin-bottom: 40px;         
 }
+
 /* --- FOOTER SECTION --- */
 footer {
     background-color: var(--dark-brown);
@@ -396,7 +388,6 @@ footer {
     width: 100%;
 }
 
-/* Left container pane: removes all internal paddings */
 .auth-graphic-side {
     flex: 1;
     overflow: hidden;
@@ -404,22 +395,21 @@ footer {
     display: flex;
 }
 
-/* Force the image to completely fill the left panel window perfectly */
 .auth-graphic-side img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Keeps image proportions clean without distortion */
+    object-fit: cover; 
     display: block;
 }
 
-/* Right container pane: handles forms cleanly */
+
 .auth-form-side {
     flex: 1.2;
     background-color: #FFFDF9;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 10%; /* Comfortable space breathing room */
+    padding: 60px 10%; 
 }
 
 .auth-header-brand {
@@ -539,20 +529,20 @@ footer {
 
     /* 2. Hero Section Typography */
     .hero-content h1 {
-        font-size: 2rem; /* Shrinks the massive headline so it fits mobile screens */
+        font-size: 2rem; 
     }
 
     /* 3. Category Bar Scrolling */
     .category-bar {
         gap: 15px;
         padding: 10px;
-        overflow-x: auto; /* Allows horizontal swiping if items overflow */
+        overflow-x: auto; 
         justify-content: flex-start;
         -webkit-overflow-scrolling: touch;
     }
 
     .category-item {
-        white-space: nowrap; /* Prevents text from breaking onto two lines */
+        white-space: nowrap; 
         padding: 8px 16px;
     }
 
@@ -571,28 +561,24 @@ footer {
         gap: 20px;
         padding: 0 10px;
     }
+/* 5. Split-Screen Auth Containers (Login/Signup Pages) */
+.auth-wrapper {
+    flex-direction: column; /* Collapses the side-by-side split into a single column */
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    height: auto;
+    min-height: unset;
+}
 
-    /* 5. Split-Screen Auth Containers (Login/Signup Pages) */
-    .login-container, 
-    .signup-container {
-        grid-template-columns: 1fr; /* Collapses the 50/50 split into a single column */
-        width: 90%;
-        max-width: 400px;
-        margin: 20px auto;
-        height: auto;
-        min-height: unset;
-    }
+/* Hide the decorative image side on mobile to save vertical space and prioritize the form */
+.auth-graphic-side {
+    display: none; 
+}
 
-    /* Hide the decorative image side on mobile to save vertical space and prioritize the form */
-    .login-image, 
-    .signup-image {
-        display: none; 
-    }
-
-    .login-form, 
-    .signup-form {
-        padding: 30px 20px;
-    }
+.auth-form-side {
+    padding: 30px 20px;
+}
 
     /* 6. Testimonial Structures */
     .testimonials-grid {
