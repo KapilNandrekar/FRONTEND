@@ -561,24 +561,8 @@ footer {
         gap: 20px;
         padding: 0 10px;
     }
-/* 5. Split-Screen Auth Containers (Login/Signup Pages) */
-.auth-wrapper {
-    flex-direction: column; /* Collapses the side-by-side split into a single column */
-    width: 90%;
-    max-width: 400px;
-    margin: 20px auto;
-    height: auto;
-    min-height: unset;
-}
+    
 
-/* Hide the decorative image side on mobile to save vertical space and prioritize the form */
-.auth-graphic-side {
-    display: none; 
-}
-
-.auth-form-side {
-    padding: 30px 20px;
-}
 
     /* 6. Testimonial Structures */
     .testimonials-grid {
