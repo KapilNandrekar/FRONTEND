@@ -331,31 +331,6 @@ nav ul li a:hover {
     margin-left: auto;
 }
 
-.dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #ccc;
-}
-
-.dot.active {
-    background-color: var(--dark-brown);
-}
-
-.newsletter-section {
-    background-color: var(--cream-bg);
-    text-align: center;
-    padding: 60px 8%;
-    margin-top: 60px;
-}
-
 .search-box {
     display: flex;
     max-width: 500px;
