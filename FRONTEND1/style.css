@@ -331,31 +331,6 @@ nav ul li a:hover {
     margin-left: auto;
 }
 
-.search-box {
-    display: flex;
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    padding: 6px;
-    border-radius: 30px;
-}
-
-.search-box input {
-    flex-grow: 1;
-    border: none;
-    padding: 0 20px;
-    outline: none;
-}
-
-.search-box button {
-    background-color: var(--dark-brown);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
 /* --- TESTIMONIAL HEADERS --- */
 .testimonials-container {
     text-align: center; /* Centers both headings horizontally */
