@@ -1,16 +1,67 @@
-# React + Vite
+# Friends Episode Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app that fetches and displays every episode of Friends from a public API, with live search by episode name.
 
-Currently, two official plugins are available:
+**Live site:** https://friendsinfor.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What this is
 
-## React Compiler
+A frontend task built around consuming a real REST API in React: fetching data on mount, managing loading/error states, and filtering a rendered list based on user input — using only `fetch` and React state, no external data-fetching library.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Fetches all Friends episodes from the TVmaze API on page load
+- Displays every episode as a card: name, season/episode number, air date, runtime, and summary (HTML tags stripped from the API's summary field)
+- Search bar with a Search button — type an episode name and submit to filter the list to matching results
+- Loading and error states while the initial fetch is in flight or if it fails
+- Live count of how many episodes match the current search
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Stack
+
+- React 19 (function components + hooks only, no class components)
+- Vite as the build tool and dev server
+- Plain CSS with custom properties (`index.css`, `SearchBox.css`, `EpisodeCard.css`) — no CSS framework or component library
+- [TVmaze API](https://www.tvmaze.com/api) (`GET /shows/431/episodes`) as the data source
+
+## Structure
+
+```
+FRONTEND3/mini-project/
+├── src/
+│   ├── App.jsx
+│   ├── SearchBox.jsx      # fetches episodes, owns search state
+│   ├── SearchBox.css
+│   ├── EpisodeCard.jsx    # renders a single episode
+│   ├── EpisodeCard.css
+│   ├── index.css
+│   └── main.jsx
+├── public/
+├── package.json
+└── vite.config.js
+```
+
+## How the data flow works
+
+- `SearchBox.jsx` fetches the full episode list once, inside a `useEffect` with an empty dependency array, on component mount.
+- Two separate pieces of state track the search box: `inputValue` (updates on every keystroke, keeps the input controlled) and `query` (only updates when the search form is submitted). Filtering runs against `query`, not `inputValue` — that's what makes search a deliberate action instead of a live filter.
+- `EpisodeCard` is a presentational component that receives a single episode object as a prop and handles its own summary-cleaning (`stripHtml`) and formatting (zero-padded season/episode numbers).
+
+## Running locally
+
+```bash
+cd FRONTEND3/mini-project
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+## Known limitations
+
+- Search matches on episode name only — no filtering by season, air date, or summary text.
+- No pagination or virtualization; all ~236 episodes render at once (fine at this dataset size, would need addressing at larger scale).
+- No automated tests.
