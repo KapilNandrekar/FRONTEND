@@ -1,0 +1,49 @@
+.EpisodeCard {
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-soft);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.EpisodeCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -10px rgba(47, 75, 110, 0.3);
+}
+
+.EpisodeCard-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.EpisodeCard-body {
+  padding: 14px 16px 16px;
+}
+
+.EpisodeCard-title {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--blue-deep);
+}
+
+.EpisodeCard-meta {
+  font-size: 12.5px;
+  color: var(--blue-mid);
+  margin: 0 0 8px;
+}
+
+.EpisodeCard-summary {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-dark);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -4,7 +4,7 @@
   border-radius: 20px;
   padding: 2rem 2rem 2.25rem;
   box-shadow: 0 10px 30px -12px rgba(47, 75, 110, 0.25);
-  max-width: 560px;
+  max-width: 1000px;
   width: 100%;
 }
 
@@ -40,65 +40,64 @@
   margin: 0;
 }
 
-.SearchBox h3 {
-  font-family: "Quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 1.15rem;
-  margin: 0 0 1.25rem;
-  color: var(--blue-deep);
-}
-
 .SearchBox-form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: flex-start;
+  gap: 10px;
 }
 
-/* MUI TextField overrides for the cozy theme */
-.SearchBox-form .MuiOutlinedInput-root {
+.SearchBox-input {
+  flex: 1;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  border: 2px solid var(--blue-soft);
   border-radius: 12px;
   background: var(--blue-bg);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
-.SearchBox-form .MuiOutlinedInput-root fieldset {
-  border-color: var(--blue-soft);
-}
-
-.SearchBox-form .MuiOutlinedInput-root:hover fieldset {
-  border-color: var(--blue-mid);
-}
-
-.SearchBox-form .MuiOutlinedInput-root.Mui-focused fieldset {
+.SearchBox-input:focus {
   border-color: var(--yellow-deep);
-  border-width: 2px;
 }
 
-.SearchBox-form .MuiInputLabel-root.Mui-focused {
-  color: var(--yellow-deep);
-}
-
-.SearchBox-form .MuiButton-root {
-  height: 56px;
+.SearchBox-button {
   padding: 0 24px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
   background-color: var(--yellow-warm);
   color: var(--blue-deep);
-  font-weight: 700;
+  border: none;
   border-radius: 12px;
-  box-shadow: none;
-  text-transform: none;
-  font-size: 15px;
+  cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.SearchBox-form .MuiButton-root:hover {
+.SearchBox-button:hover {
   background-color: var(--yellow-deep);
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px -6px rgba(217, 154, 31, 0.6);
 }
 
-.SearchBox-form .MuiButton-root.Mui-disabled {
-  background-color: var(--blue-soft);
+@media (max-width: 480px) {
+  .SearchBox-form {
+    flex-direction: column;
+  }
+}
+
+.SearchBox-status {
+  margin-top: 1.25rem;
+  color: var(--blue-mid);
+  font-size: 14px;
+}
+
+.SearchBox-count {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--blue-mid);
 }
 
@@ -112,54 +111,14 @@
   font-size: 14px;
 }
 
-.SearchBox-result {
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 2px dashed var(--blue-soft);
-  animation: fadeIn 0.3s ease;
+.SearchBox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
 }
 
-.SearchBox-result h4 {
-  font-family: "Quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  margin: 0 0 12px;
-  color: var(--blue-deep);
-}
-
-.SearchBox-image {
-  width: 50%;
-  border-radius: 14px;
-  margin-bottom: 14px;
-  border: 3px solid var(--yellow-warm);
-}
-
-.SearchBox-result p {
-  font-size: 14.5px;
-  line-height: 1.6;
-  margin: 5px 0;
-  color: var(--text-dark);
-}
-
-.SearchBox-result strong {
-  color: var(--blue-mid);
-}
-
-.SearchBox-summary {
-  margin-top: 12px;
-  padding: 12px 14px;
-  background: var(--blue-bg);
-  border-radius: 12px;
-  color: var(--text-dark);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 640px) {
+  .SearchBox-grid {
+    grid-template-columns: 1fr;
   }
 }

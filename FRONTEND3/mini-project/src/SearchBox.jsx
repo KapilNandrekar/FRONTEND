@@ -1,119 +1,84 @@
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import "./SearchBox.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import EpisodeCard from "./EpisodeCard.jsx";
 
 const API_URL = "https://api.tvmaze.com/shows/431/episodes";
 
-function stripHtml(html) {
-    if (!html) return "";
-    return html.replace(/<[^>]*>/g, "");
-}
-
 export default function SearchBox() {
-    let [season, setSeason] = useState("");
-    let [episodeNumber, setEpisodeNumber] = useState("");
-    let [episode, setEpisode] = useState(null);
-    let [loading, setLoading] = useState(false);
-    let [error, setError] = useState("");
+    const [episodes, setEpisodes] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [query, setQuery] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    let handleSeasonChange = (e) => {
-        setSeason(e.target.value);
-    };
-
-    let handleEpisodeChange = (e) => {
-        setEpisodeNumber(e.target.value);
-    };
-
-    let handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setEpisode(null);
-        setLoading(true);
-
-        try {
-            const res = await fetch(API_URL);
-            if (!res.ok) {
-                throw new Error(`Request failed (${res.status})`);
+    useEffect(() => {
+        async function fetchEpisodes() {
+            setLoading(true);
+            setError("");
+            try {
+                const res = await fetch(API_URL);
+                if (!res.ok) {
+                    throw new Error(`Request failed (${res.status})`);
+                }
+                const data = await res.json();
+                setEpisodes(data);
+            } catch (err) {
+                setError(err.message || "Something went wrong fetching episodes.");
+            } finally {
+                setLoading(false);
             }
-            const allEpisodes = await res.json();
-
-            const seasonNum = Number(season);
-            const episodeNum = Number(episodeNumber);
-
-            const found = allEpisodes.find(
-                (ep) => ep.season === seasonNum && ep.number === episodeNum
-            );
-
-            if (!found) {
-                setError(`No episode found for Season ${season}, Episode ${episodeNumber}.`);
-            } else {
-                setEpisode(found);
-            }
-        } catch (err) {
-            setError(err.message || "Something went wrong fetching the episode.");
-        } finally {
-            setLoading(false);
         }
+        fetchEpisodes();
+    }, []);
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
     };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setQuery(inputValue);
+    };
+
+    const filteredEpisodes = episodes.filter((ep) =>
+        ep.name.toLowerCase().includes(query.toLowerCase())
+    );
 
     return (
         <div className="SearchBox">
             <div className="SearchBox-header">
                 <span className="SearchBox-eyebrow">Central Perk Archive</span>
                 <h2 className="SearchBox-title">Friends Episode Explorer</h2>
-                <p className="SearchBox-tagline">
-                    Find out what happened, one season and episode at a time.
-                </p>
+                <p className="SearchBox-tagline">Browse every episode, or search by name.</p>
             </div>
 
-            <h3>Search for the episode:</h3>
-            <form onSubmit={handleSubmit} className="SearchBox-form">
-                <TextField
-                    id="season"
-                    label="Season Number"
-                    variant="outlined"
-                    type="number"
-                    required
-                    value={season}
-                    onChange={handleSeasonChange}
+            <form className="SearchBox-form" onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    className="SearchBox-input"
+                    placeholder="Search episodes by name..."
+                    value={inputValue}
+                    onChange={handleInputChange}
                 />
-                <TextField
-                    id="episode"
-                    label="Episode Number"
-                    variant="outlined"
-                    type="number"
-                    required
-                    value={episodeNumber}
-                    onChange={handleEpisodeChange}
-                />
-                <Button variant="contained" type="submit" disabled={loading}>
-                    {loading ? "Searching..." : "Search"}
-                </Button>
+                <button type="submit" className="SearchBox-button">
+                    Search
+                </button>
             </form>
 
-            {error && (
-                <p className="SearchBox-error">{error}</p>
-            )}
+            {loading && <p className="SearchBox-status">Loading episodes...</p>}
+            {error && <p className="SearchBox-error">{error}</p>}
 
-            {episode && (
-                <div className="SearchBox-result">
-                    <h4>
-                        S{String(episode.season).padStart(2, "0")}
-                        E{String(episode.number).padStart(2, "0")}: {episode.name}
-                    </h4>
-                    {episode.image?.medium && (
-                        <img
-                            src={episode.image.medium}
-                            alt={episode.name}
-                            className="SearchBox-image"
-                        />
-                    )}
-                    <p><strong>Air date:</strong> {episode.airdate}</p>
-                    <p><strong>Runtime:</strong> {episode.runtime} minutes</p>
-                    <p><strong>Rating:</strong> {episode.rating?.average ?? "N/A"}</p>
-                    <p className="SearchBox-summary">{stripHtml(episode.summary)}</p>
-                </div>
+            {!loading && !error && (
+                <>
+                    <p className="SearchBox-count">
+                        {filteredEpisodes.length} episode{filteredEpisodes.length !== 1 ? "s" : ""} found
+                    </p>
+                    <div className="SearchBox-grid">
+                        {filteredEpisodes.map((ep) => (
+                            <EpisodeCard key={ep.id} episode={ep} />
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     );
